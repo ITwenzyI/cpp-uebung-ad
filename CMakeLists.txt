@@ -8,3 +8,4 @@ add_executable(cpp_uebung_ad
 add_executable(01 uebung01/01.cpp)
 add_executable(02 uebung01/02.cpp)
 add_executable(03 uebung01/03.cpp)
+add_executable(04a uebung01/04a.cpp)

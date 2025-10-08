@@ -1,11 +1,13 @@
 /*
- * File: 03
+ * File: 04a
  * Author: Kilian | ItwenzyI
- * Created: 07.10.2025
+ * Created: 08.10.2025
  * Description: 
  */
 //
 #include <iostream>
+#include <chrono>       // chrono für Zeitmessung
+#include <thread>       // sleep_for
 
 class Matrix {
 private:
@@ -64,48 +66,84 @@ private:
 
 
     Matrix add(const Matrix& x) {
+        // Start Punkt der Zeitmessung
+        auto start = std::chrono::high_resolution_clock::now();
+        // Counter Variable für die Zugriffe
+        int counter = 0;
 
+        ++counter;
         Matrix y = Matrix(x.zeilen, x.spalten);
 
+        ++counter;
         // Abfrage der Matritzen wichtig für addition
         if (this->zeilen == x.zeilen && this->spalten == x.spalten) {
+            ++counter;
             for (int i = 0; i < zeilen; i++) {
-                
+                ++counter;
                 for (int j = 0; j < spalten; j++) {
+                    ++counter;
                     // Neue Matrix = Jeder Wert der alten + übergebene
                     y.data[i*spalten + j] = data[i*spalten + j] + x.data[i*zeilen + j];
                 }
             }
         }
         else {
+            ++counter;
             std::cout << "Fehler, nicht gleiche Spalten und Zeilen Anzahl der Matrizen!" << std::endl;
         }
+        ++counter;
+        std::cout << "Counter Add: " << counter << std::endl;
+        auto ende = std::chrono::high_resolution_clock::now();
+        auto dauer = std::chrono::duration_cast<std::chrono::milliseconds>(ende - start);
+        std::cout << "Verstrichene Zeit Add: " << dauer.count() << " ms" << std::endl;
         return y;
     }
 
     Matrix mult(const Matrix& x) {
+        // Start der Zeitmessung
+        auto start = std::chrono::high_resolution_clock::now();
+        // Counter für Zugriffe
+        int counter = 0;
 
+        ++counter;
         // Bei Multiplikation verändert sich die Ergebnis Matrix
         Matrix y(this->zeilen, x.spalten);
-        
+
+        // Test ob Zeit in ms funktioniert
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+        // Bei Multiplikation wichtig das Spalten der ersten Matrix == Zeilen der Übergebenen Matrix ist.
+        ++counter;
         if (this->spalten == x.zeilen) {
+            ++counter;
             for (int i = 0; i < zeilen; i++) {
-                
+                ++counter;
                 for (int j = 0; j < x.spalten; j++) {
+                    ++counter;
                     int sum = 0;
-                    
+
+                    ++counter;
                     for (int k = 0; k < this->spalten; k++) {
+                        ++counter;
                         // Summiert hier auf weil bei Multiplikation ja Zeile * Spalte durchgeführt wird
                         sum += data[i * this->spalten + k] * x.data[k * x.spalten + j];
                     }
+                    ++counter;
                     // Neue Matrix bekommt sum von oben
                     y.data[i * x.spalten + j] = sum;
                 }
             }
         }
         else {
+            ++counter;
             std::cout << "Fehler, die Matrize 1 muss gleich viele Spalten wie die Matrize 2 Zeilen haben!" << std::endl;
         }
+
+        ++counter;
+        std::cout << "Counter Mult: " << counter << std::endl;
+        auto ende = std::chrono::high_resolution_clock::now();
+        auto dauer = std::chrono::duration_cast<std::chrono::milliseconds>(ende - start);
+        std::cout << "Verstrichene Zeit Mult: " << dauer.count() << " ms" << std::endl;
         return y;
     }
 
