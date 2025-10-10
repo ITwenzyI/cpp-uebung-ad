@@ -16,7 +16,7 @@ private:
     int *data;
     public:
     // Konsturktor mit Zeilen und Spalten ohne Inhalt wenn man über input Inhalt bestimmen will
-    Matrix(int z, int s) : zeilen(z), spalten(s) {
+    Matrix(const int &z, const int &s) : zeilen(z), spalten(s) {
         // Zeilen*Spalten weil genau so viele int Werte die Matrix hat
         data = new int[zeilen*spalten];
         for (int i = 0; i < zeilen*spalten; i++) {
@@ -38,8 +38,16 @@ private:
         delete[] data;
     }
 
+    // Move Konstruktor
+    Matrix(Matrix&& other) noexcept
+    : zeilen(other.zeilen), spalten(other.spalten), data(other.data)
+    {
+        other.data = nullptr;
+        other.zeilen = other.spalten = 0;
+    }
+
     // Print Funktion
-    void print() {
+    void print() const {
         for (int i = 0; i < zeilen; i++) {
             for (int j = 0; j < spalten; j++) {
                 std::cout << data[i*spalten + j] << " ";
@@ -65,7 +73,7 @@ private:
     }
 
 
-    Matrix add(const Matrix& x) {
+    Matrix add(const Matrix& x) const {
         // Start Punkt der Zeitmessung
         auto start = std::chrono::high_resolution_clock::now();
         // Counter Variable für die Zugriffe
@@ -99,7 +107,7 @@ private:
         return y;
     }
 
-    Matrix mult(const Matrix& x) {
+    Matrix mult(const Matrix& x) const {
         // Start der Zeitmessung
         auto start = std::chrono::high_resolution_clock::now();
         // Counter für Zugriffe
