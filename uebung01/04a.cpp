@@ -83,7 +83,7 @@ private:
                 for (int j = 0; j < spalten; j++) {
                     ++counter;
                     // Neue Matrix = Jeder Wert der alten + übergebene
-                    y.data[i*spalten + j] = data[i*spalten + j] + x.data[i*zeilen + j];
+                    y.data[i*spalten + j] = data[i*spalten + j] + x.data[i*spalten + j];
                 }
             }
         }
