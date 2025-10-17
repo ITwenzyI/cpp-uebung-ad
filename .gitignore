@@ -42,6 +42,7 @@ install_manifest.txt
 # CLion & JetBrains spezifische Dateien
 .idea/
 *.iml
+*.zip
 
 # Compiler-Ausgaben
 *.o
