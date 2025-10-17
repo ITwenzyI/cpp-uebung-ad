@@ -45,12 +45,14 @@ int function2(int n, int m) {
 }
 
 int main() {
-    std::cout << function2(0, 3) << std::endl; // → 4
-    std::cout << function2(1, 1) << std::endl; // → 3
-    std::cout << function2(2, 2) << std::endl; // → 7
-    std::cout << function2(3, 2) << std::endl; // → 29
-    std::cout << function2(3, 3) << std::endl; // → 61
-    std::cout << function2(4, 4) << std::endl; // → 29
+    for (int i = 0; i <= 4; i++) {
+        for (int j = 0; j <= 4; j++) {
+            std::cout << "n:" << i << " m:" << j << " :";
+            std::cout << function(i,j) << std::endl;
+            // Ab n=4 und m=1 bricht das Programm ab, da es zu groß wird.
+        }
+    }
+
 
     return 0;
 }
