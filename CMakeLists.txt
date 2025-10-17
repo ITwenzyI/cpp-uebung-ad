@@ -10,4 +10,6 @@ add_executable(02 uebung01/02.cpp)
 add_executable(03 uebung01/03.cpp)
 add_executable(04a uebung01/04a.cpp)
 add_executable(04b uebung01/04b.cpp)
-add_executable(2.04 uebung02/2.04.cpp)
+add_executable(2.04 uebung02/2.04.cpp
+        uebung02/2.01.cpp)
+add_executable(2.01 uebung02/2.01.cpp)
