@@ -1,0 +1,8 @@
+LDA R1, n      // Eingabewert n
+LDA R2, 0      // Ergebnisregister initialisieren
+LDA R3, n      // Zähler = n
+JEZ R3, 8        // Wenn R3 == 0, dann Sprung zu 8 (Ende)
+ADD R2, R1      // R2 = R2 + R1
+SUB R3, 1       // R3 = R3 - 1
+JMP 4          // Springe zurück zur Schleifenprüfung
+HLT 99           // Fertig, Ergebnis in R2
