@@ -88,7 +88,10 @@ int main() {
     int pc = 0;
     while (pc >= 0 && pc < (int)programm.size()) {
         Instruction instr = programm[pc];
+        //std::cout <<"DEBUG GANZ OBEN PC"<< pc << instr.op << std::endl;
         switch (instr.op) {
+
+
             case LDA:
                 if (instr.reg1 == "R1") {
                     if (instr.reg2 == "R2")
@@ -134,21 +137,166 @@ int main() {
                 pc++;
                 break;
 
+
+
             case ADD:
+                if (instr.reg1 == "R1") {
+                    if (instr.reg2 == "R2") {
+                        reg[1] = reg[1] + reg[2];
+                    }
+                    else if (instr.reg2 == "R3") {
+                        reg[1] = reg[1] + reg[3];
+                    }
+                    else if (instr.reg2 == "n") {
+                        reg[1] = reg[1] + n;
+                    }
+                    else {
+                        reg[1] = reg[1] + std::stoi(instr.reg2);
+                    }
+
+                }
+
+                else if (instr.reg1 == "R2") {
+                    if (instr.reg2 == "R1") {
+                        reg[2] = reg[2] + reg[1];
+                    }
+                    else if (instr.reg2 == "R3") {
+                        reg[2] = reg[2] + reg[3];
+                    }
+                    else if (instr.reg2 == "n") {
+                        reg[2] = reg[2] + n;
+                    }
+                    else {
+                        reg[2] = reg[2] + std::stoi(instr.reg2);
+                    }
+
+                }
+
+                else if (instr.reg1 == "R3") {
+                    if (instr.reg2 == "R1") {
+                        reg[3] = reg[3] + reg[1];
+                    }
+                    else if (instr.reg2 == "R2") {
+                        reg[3] = reg[3] + reg[2];
+                    }
+                    else if (instr.reg2 == "n") {
+                        reg[3] = reg[3] + n;
+                    }
+                    else {
+                        reg[3] = reg[3] + std::stoi(instr.reg2);
+                    }
+
+                }
                 pc++;
                 break;
+
+
+
 
             case SUB:
+                if (instr.reg1 == "R1") {
+                    if (instr.reg2 == "R2") {
+                        reg[1] = reg[1] - reg[2];
+                    }
+                    else if (instr.reg2 == "R3") {
+                        reg[1] = reg[1] - reg[3];
+                    }
+                    else if (instr.reg2 == "n") {
+                        reg[1] = reg[1] - n;
+                    }
+                    else {
+                        reg[1] = reg[1] - std::stoi(instr.reg2);
+                    }
+
+                }
+
+                else if (instr.reg1 == "R2") {
+                    if (instr.reg2 == "R1") {
+                        reg[2] = reg[2] - reg[1];
+                    }
+                    else if (instr.reg2 == "R3") {
+                        reg[2] = reg[2] - reg[3];
+                    }
+                    else if (instr.reg2 == "n") {
+                        reg[2] = reg[2] - n;
+                    }
+                    else {
+                        reg[2] = reg[2] - std::stoi(instr.reg2);
+                    }
+
+                }
+
+                else if (instr.reg1 == "R3") {
+                    if (instr.reg2 == "R1") {
+                        reg[3] = reg[3] - reg[1];
+                    }
+                    else if (instr.reg2 == "R2") {
+                        reg[3] = reg[3] - reg[2];
+                    }
+                    else if (instr.reg2 == "n") {
+                        reg[3] = reg[3] - n;
+                    }
+                    else {
+                        reg[3] = reg[3] - std::stoi(instr.reg2);
+                    }
+
+                }
                 pc++;
                 break;
+
+
+
+
 
             case JMP:
+                std::cout << instr.reg1 << " DEBUG JMP " << instr.reg2 << std::endl;
+                pc = std::stoi(instr.reg1) - 1;
+                std::cout << pc << std::endl;
+                break;
+
+
+
+
+
+            case JEZ:
+                std::cout << instr.reg1 << " DEBUG JEZ " << instr.reg2 << std::endl;
+
+                if (instr.reg1 == "R1") {
+                    //std::cout << instr.reg1 << " DEBUG JEZ1 " << instr.reg2 << std::endl;
+                    if (reg[1] == 0) {
+                        pc = std::stoi(instr.reg2);
+                    }
+                    else {
+                        pc++;
+                    }
+                }
+
+                else if (instr.reg1 == "R2") {
+                    //std::cout << instr.reg1 << " DEBUG JEZ2 " << instr.reg2 << std::endl;
+                    if (reg[2] == 0) {
+                        pc = std::stoi(instr.reg2);
+                    }
+                    else {
+                        pc++;
+                    }
+                }
+
+                else if (instr.reg1 == "R3") {
+                    //std::cout << instr.reg1 << " DEBUG JEZ3 " << instr.reg2 << std::endl;
+                    if (reg[3] == 0) {
+                        pc = std::stoi(instr.reg2);
+                    }
+                    else {
+                        pc++;
+                        //pc = std::stoi(instr.reg2);
+                    }
+                }
                 pc++;
                 break;
 
-            case JEZ:
-                pc++;
-                break;
+
+
+
 
             case HLT:
                 if (instr.reg1 == "99")
@@ -166,7 +314,7 @@ int main() {
     }
 
     std::cout << "Registerzustand:\n";
-    for (size_t i = 0; i < reg.size(); ++i)
+    for (size_t i = 1; i < reg.size(); ++i)
         std::cout << "R" << i << " = " << reg[i] << std::endl;
 
     return 0;
