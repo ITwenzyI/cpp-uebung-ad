@@ -43,6 +43,7 @@ install_manifest.txt
 .idea/
 *.iml
 *.zip
+*.pdf
 
 # Compiler-Ausgaben
 *.o
