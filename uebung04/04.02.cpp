@@ -22,7 +22,7 @@ void Insertionsort(int a[], int n) {
         std::cout << std::endl;
 
         std::cout << "a[i]= " << a[i] << " key=" << key << std::endl;
-        while (i >= 0 && a[i] > key) {
+        while (i >= 0 && a[i] < key) {
             a[i + 1] = a[i]; //a2 = 13
             i = i - 1; // 0
         }
