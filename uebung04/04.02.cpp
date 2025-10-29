@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <random>
 
 void Insertionsort(int a[], int n) {
     std::cout << "------------------ INSERTION SORT ------------------" << std::endl;
@@ -83,6 +84,15 @@ void swap(int &a, int &b) {
 
 void preparePartition(int a[], int f, int l, int &p) {
 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(f, l);
+
+    int zufall = dist(gen);
+    std::cout << zufall << std::endl;
+    swap(a[f], a[zufall]);
+
+
     int pivot = a[f]; p = f-1;
     for (int i = f; i <= l; i++) {
         if (a[i] <= pivot) {
@@ -108,7 +118,8 @@ int main() {
     int a[] = {-5, 13, -32, 7, -3, 17, 23, 12, -35, 19};
     //Insertionsort(a, std::size(a));
     //Bubblesort(a, std::size(a));
-    Selectionsort(a, std::size(a));
+    //Selectionsort(a, std::size(a));
+    quicksort(a, 0, 9);
     for (int i : a) {
         std::cout << i << " ";
     }
