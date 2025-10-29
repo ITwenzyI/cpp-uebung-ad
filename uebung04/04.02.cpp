@@ -53,15 +53,16 @@ void Bubblesort(int a[], int n) {
 void Selectionsort(int a[], int n) {
     std::cout << "------------------ SELECTION SORT ------------------" << std::endl;
     int i, j, min;
-    for (i = 0; i < n; i++) {
+    for (i = n-1; i >= 0; i--) {
         min = i;
 
-        for (j = i; j < n; j++) {
+        for (j = 0; j <= i; j++) {
             std::cout << "a[j]=" << a[j] <<" a[min]=" << a[min] << std::endl;
-            if (a[j] < a[min]) {
+            if (a[j] > a[min]) {
                 min = j;
             }
-        }
+        } // min = 6
+
         int temp = a[i];
         a[i] = a[min];
         a[min] = temp;
@@ -106,8 +107,8 @@ void quicksort(int a[], int f, int l) {
 int main() {
     int a[] = {-5, 13, -32, 7, -3, 17, 23, 12, -35, 19};
     //Insertionsort(a, std::size(a));
-    Bubblesort(a, std::size(a));
-    //Selectionsort(a, std::size(a));
+    //Bubblesort(a, std::size(a));
+    Selectionsort(a, std::size(a));
     for (int i : a) {
         std::cout << i << " ";
     }
