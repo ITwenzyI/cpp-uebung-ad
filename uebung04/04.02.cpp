@@ -34,8 +34,8 @@ void Insertionsort(int a[], int n) {
 
 void Bubblesort(int a[], int n) {
     std::cout << "------------------ BUBBLE SORT ------------------" << std::endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = n-2; j >= i; j--) {
+    for (int i = n; i > 0; i--) {
+        for (int j = 0; j <= i; j++) {
             std::cout << "a[j]=" << a[j] <<" a[j+1]=" << a[j + 1] << std::endl;
             if (a[j] > a[j + 1]) {
                 int temp = a[j];
@@ -105,8 +105,8 @@ void quicksort(int a[], int f, int l) {
 
 int main() {
     int a[] = {-5, 13, -32, 7, -3, 17, 23, 12, -35, 19};
-    Insertionsort(a, std::size(a));
-    //Bubblesort(a, std::size(a));
+    //Insertionsort(a, std::size(a));
+    Bubblesort(a, std::size(a));
     //Selectionsort(a, std::size(a));
     for (int i : a) {
         std::cout << i << " ";
